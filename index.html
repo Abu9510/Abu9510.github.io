@@ -88,16 +88,20 @@
     </header>
 
     <div class="section">
-      <table class="info-table">
-        <tr>
-          <td><strong>Business Name:</strong> ABSTECH</td>
-          <td><strong>To:</strong> Nur</td>
-        </tr>
-        <tr>
-          <td><strong>Address:</strong> 62a Aries Road, Surrey Estate</td>
-          <td><strong>Customer Address:</strong> [Insert Here]</td>
-        </tr>
-      </table>
+     <table class="info-table">
+  <tr>
+    <td><strong>Business Name:</strong> ABSTECH</td>
+    <td><strong>To:</strong>
+      <input type="text" placeholder="Customer Name" id="customer-name" style="width: 100%;" />
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Address:</strong> 62a Aries Road, Surrey Estate</td>
+    <td><strong>Customer Address:</strong>
+      <textarea placeholder="Customer Address" id="customer-address" style="width: 100%;" rows="2"></textarea>
+    </td>
+  </tr>
+</table>
     </div>
 
     <div class="section">
@@ -169,6 +173,17 @@
   <script>
   // Set today's date in the quote
   document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
+
+     document.querySelector('.print-button').addEventListener('click', function () {
+    const name = document.getElementById('customer-name').value;
+    const address = document.getElementById('customer-address').value;
+
+    // Replace input fields with plain text before printing
+    document.getElementById('customer-name').outerHTML = name;
+    document.getElementById('customer-address').outerHTML = address;
+
+    window.print();
+  });
 </script>
 </body>
 </html>
