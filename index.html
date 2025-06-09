@@ -184,9 +184,9 @@
 
       newRow.innerHTML = `
         <td><input type="text" name="description[]"></td>
-        <td><input type="number" name="quantity[]" oninput="updateAmount(this)"></td>
-        <td><input type="number" name="price[]" oninput="updateAmount(this)"></td>
-        <td><input type="number" name="amount[]" readonly></td>
+        <td><input type="number" name="qty[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="price[]"></td>
+        <td><input type="number" name="amount[]"></td>
         <td><button onclick="removeRow(this)">Remove</button></td>
       `;
     }
