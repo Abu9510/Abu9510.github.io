@@ -40,38 +40,7 @@
     </table>
 
     <button onclick="addRow()">Add Item</button>
-    <script>
-    function addItem() {
-      const tbody = document.getElementById("itemsBody");
-      const row = document.createElement("tr");
-
-      row.innerHTML = `
-        <td><input type="text" class="item-code" placeholder="Item Code"></td>
-        <td><input type="text" class="item-desc" placeholder="Description"></td>
-        <td><input type="number" class="item-qty" value="1" min="1" onchange="updateAmount(this)"></td>
-        <td><input type="number" class="item-price" value="0" min="0" onchange="updateAmount(this)"></td>
-        <td class="item-amount">$0.00</td>
-        <td><button onclick="removeItem(this)">Remove</button></td>
-      `;
-
-      tbody.appendChild(row);
-    }
-
-    function updateAmount(el) {
-      const row = el.closest("tr");
-      const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
-      const price = parseFloat(row.querySelector(".item-price").value) || 0;
-      const amount = qty * price;
-      row.querySelector(".item-amount").innerText = `$${amount.toFixed(2)}`;
-    }
-
-    function removeItem(button) {
-      const row = button.closest("tr");
-      row.remove();
-    }
-  </script>
-
-
+  
     <div class="totals">
       <p>Subtotal: R<span id="subtotal">0.00</span></p>
       <p><strong>Total: R<span id="total">0.00</span></strong></p>
