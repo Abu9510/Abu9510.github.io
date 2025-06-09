@@ -174,7 +174,7 @@
   document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
 
      function addItem() {
-      const table = document.getElementByclass("itemsTable").getElementsByTagName("tbody")[0];
+      const table = document.getElementById("itemsTable").getElementsByTagName("tbody")[0];
       const newRow = table.insertRow();
 
       newRow.innerHTML = `
