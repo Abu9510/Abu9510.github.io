@@ -37,7 +37,7 @@
 </head>
 <body>
 
-  <h2>Invoice Form</h2>
+  <h2>ABSTECH Quotes</h2>
 
   <label>Date: <input type="date" id="invoiceDate"></label><br><br>
   <label>Time: <input type="time" id="invoiceTime"></label><br><br>
@@ -71,7 +71,7 @@
         <td><input type="text" class="item-desc" placeholder="Description"></td>
         <td><input type="number" class="item-qty" value="1" min="1" onchange="updateAmount(this)"></td>
         <td><input type="number" class="item-price" value="0" min="0" onchange="updateAmount(this)"></td>
-        <td class="item-amount">$0.00</td>
+        <td class="item-amount">R0.00</td>
         <td><button onclick="removeItem(this)">Remove</button></td>
       `;
 
@@ -83,7 +83,7 @@
       const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
       const price = parseFloat(row.querySelector(".item-price").value) || 0;
       const amount = qty * price;
-      row.querySelector(".item-amount").innerText = `$${amount.toFixed(2)}`;
+      row.querySelector(".item-amount").innerText = `RR{amount.toFixed(2)}`;
     }
 
     function removeItem(button) {
@@ -93,6 +93,6 @@
   </script>
 
 
-  <div class="total" id="totalAmount">Total: $0.00</div>
+  <div class="total" id="totalAmount">Total: R0.00</div>
 </body>
 </html>
