@@ -1,87 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Quotation System with Total</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quotation - ABSTECH</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 600px;
+      margin: 40px;
+      color: #333;
+    }
+
+    .quote-container {
+      border: 4px solid #007BFF;
+      padding: 30px;
+      max-width: 800px;
       margin: auto;
     }
-    input, button {
-      padding: 10px;
-      margin: 5px 0;
+
+    header, footer {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #007BFF;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .info-table, .items-table {
       width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
     }
-    .item-list {
-      margin-top: 20px;
+
+    .info-table td {
+      padding: 5px 10px;
     }
-    .item {
+
+    .items-table th, .items-table td {
+      border: 1px solid #ddd;
       padding: 8px;
-      border-bottom: 1px solid #ccc;
     }
-    .total {
+
+    .items-table th {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .bold {
       font-weight: bold;
-      font-size: 1.2em;
+    }
+
+    .note {
+      font-style: italic;
       margin-top: 20px;
+    }
+
+    .print-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .print-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
+  <div class="quote-container">
+    <header>
+      <h1>QUOTE</h1>
+      <p>Date: 6/17/2023 | Quote #: Quote0157</p>
+    </header>
 
-  <h1>ABSTECH</h1>
-  <h2>Quotation</h2>
+    <div class="section">
+      <table class="info-table">
+        <tr>
+          <td><strong>Business Name:</strong> ABSTECH</td>
+          <td><strong>To:</strong> Nur</td>
+        </tr>
+        <tr>
+          <td><strong>Address:</strong> 62a Aries Road, Surrey Estate</td>
+          <td><strong>Customer Address:</strong> [Insert Here]</td>
+        </tr>
+      </table>
+    </div>
 
-  <input type="text" id="itemDesc" placeholder="Item description">
-  <input type="number" id="itemAmount" placeholder="Amount (e.g. R49.99)" step="0.01">
-  <input type="number" id="itemquantity" placeholder="Qty" step"1">  
+    <div class="section">
+      <strong>Banking Details:</strong><br />
+      Capitec Business<br />
+      Account: 1051140005<br />
+      Name: ABSTECH<br />
+      Branch Code: 450105 / Universal
+    </div>
 
-  <button onclick="addItem()">Add Item</button>
+    <div class="section">
+      <table class="info-table">
+        <tr>
+          <td><strong>Salesperson:</strong> Abubakr</td>
+          <td><strong>Job:</strong> Installation</td>
+        </tr>
+        <tr>
+          <td><strong>Shipping Method:</strong> -</td>
+          <td><strong>Shipping Terms:</strong> -</td>
+        </tr>
+        <tr>
+          <td><strong>Delivery Date:</strong> -</td>
+          <td><strong>Payment Terms:</strong> EFT</td>
+        </tr>
+        <tr>
+          <td><strong>Due Date:</strong> -</td>
+        </tr>
+      </table>
+    </div>
 
-  <div class="item-list" id="itemList"></div>
-  <div class="total" id="totalAmount">Total: R0.00</div>
+    <div class="section">
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Qty</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Line Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1x</td><td>Gate Button</td><td>-</td><td>R27.08</td><td>R27.08</td></tr>
+          <tr><td>1x</td><td>Power Supply</td><td>-</td><td>R290.25</td><td>R290.25</td></tr>
+          <tr><td>1x</td><td>Cabling</td><td>-</td><td>-</td><td>R122.50</td></tr>
+          <tr><td>1x</td><td>Receiver</td><td>-</td><td>R260.60</td><td>R260.60</td></tr>
+          <tr><td>1x</td><td>Remote Button (1 button)</td><td>-</td><td>R183.00</td><td>R183.00</td></tr>
+          <tr><td>1x</td><td>Labor</td><td>-</td><td>R550.00</td><td>R550.00</td></tr>
+        </tbody>
+      </table>
 
-  <script>
-    let items = [];
-    let total = 0;
+      <table class="info-table">
+        <tr>
+          <td class="right bold" colspan="4">Subtotal:</td>
+          <td class="right">R1,433.43</td>
+        </tr>
+        <tr>
+          <td class="right bold" colspan="4">Total:</td>
+          <td class="right">R1,433.43</td>
+        </tr>
+      </table>
+    </div>
 
-    function addItem() {
-      const desc = document.getElementById("itemDesc").value.trim();
-      const amount = parseFloat(document.getElementById("itemAmount").value);
+    <div class="note">
+      80% payment is required to secure installation spot. <br />
+      Make all checks payable to Abs Tech. <br />
+      Thank you for your business!
+    </div>
 
-      if (!desc || isNaN(amount) || amount < 0) {
-        alert("Please enter a valid description and a positive amount.");
-        return;
-      }
-
-      items.push({ desc, amount });
-      total += amount;
-
-      // Clear inputs
-      document.getElementById("itemDesc").value = "";
-      document.getElementById("itemAmount").value = "";
-
-      renderItems();
-      updateTotal();
-    }
-
-    function renderItems() {
-      const list = document.getElementById("itemList");
-      list.innerHTML = "";
-      items.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.className = "item";
-        div.textContent = `#${index + 1} - ${item.desc}: $${item.amount.toFixed(2)}`;
-        list.appendChild(div);
-      });
-    }
-
-    function updateTotal() {
-      document.getElementById("totalAmount").textContent = `Total: $${total.toFixed(2)}`;
-    }
-  </script>
-
+    <footer>
+      <button class="print-button" onclick="window.print()">Print Quote</button>
+    </footer>
+  </div>
 </body>
 </html>
