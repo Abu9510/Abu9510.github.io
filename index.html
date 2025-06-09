@@ -84,7 +84,7 @@
   <div class="quote-container">
     <header>
       <h1>QUOTE</h1>
-      <p>Date: 6/17/2023 | Quote #: Quote0157</p>
+      <p>Date: <span id="quote-date"></span>  | Quote #: Quote step="01"</p>
     </header>
 
     <div class="section">
@@ -111,7 +111,7 @@
     <div class="section">
       <table class="info-table">
         <tr>
-          <td><strong>Salesperson:</strong> Abubakr</td>
+          <td><strong>Installer:</strong> Abubakr</td>
           <td><strong>Job:</strong> Installation</td>
         </tr>
         <tr>
@@ -140,12 +140,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>1x</td><td>Gate Button</td><td>-</td><td>R27.08</td><td>R27.08</td></tr>
-          <tr><td>1x</td><td>Power Supply</td><td>-</td><td>R290.25</td><td>R290.25</td></tr>
-          <tr><td>1x</td><td>Cabling</td><td>-</td><td>-</td><td>R122.50</td></tr>
-          <tr><td>1x</td><td>Receiver</td><td>-</td><td>R260.60</td><td>R260.60</td></tr>
-          <tr><td>1x</td><td>Remote Button (1 button)</td><td>-</td><td>R183.00</td><td>R183.00</td></tr>
-          <tr><td>1x</td><td>Labor</td><td>-</td><td>R550.00</td><td>R550.00</td></tr>
+          
         </tbody>
       </table>
 
@@ -163,7 +158,7 @@
 
     <div class="note">
       80% payment is required to secure installation spot. <br />
-      Make all checks payable to Abs Tech. <br />
+      Make all checks payable to AbsTech. <br />
       Thank you for your business!
     </div>
 
@@ -171,5 +166,9 @@
       <button class="print-button" onclick="window.print()">Print Quote</button>
     </footer>
   </div>
+  <script>
+  // Set today's date in the quote
+  document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
+</script>
 </body>
 </html>
