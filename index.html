@@ -143,9 +143,17 @@
             <th>Line Total</th>
           </tr>
         </thead>
-        <tbody>
-          
-        </tbody>
+        <tbody id="invoiceBody">
+        <!-- Rows inserted dynamically -->
+      </tbody>
+    </table>
+
+    <button onclick="addRow()">Add Item</button>
+
+    <div class="totals">
+      <p>Subtotal: R<span id="subtotal">0.00</span></p>
+      <p><strong>Total: R<span id="total">0.00</span></strong></p>
+    </div>
       </table>
 
       <table class="info-table">
