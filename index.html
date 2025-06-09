@@ -2,99 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Invoice Form</title>
+  <title>Quotation System with Total</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, button {
       padding: 10px;
-    }
-    table {
+      margin: 5px 0;
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
     }
-    th, td {
-      border: 1px solid #ccc;
+    .item-list {
+      margin-top: 20px;
+    }
+    .item {
       padding: 8px;
-    }
-    th {
-      background-color: #f4f4f4;
-    }
-    input[type="text"], input[type="number"], input[type="date"], input[type="time"] {
-      padding: 1px;
-      width: 100%;
-    }
-    button {
-      margin-top: 10px;
-      padding: 8px 12px;
+      border-bottom: 1px solid #ccc;
     }
     .total {
-      text-align: right;
       font-weight: bold;
-      margin-top: 15px;
+      font-size: 1.2em;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h2>ABSTECH </h2>
+  <h1>ABSTECH</h1>
+  <h2>Quotation</h2>
 
-  <h2>Quotations</h2>
-
-  <label>Date: <input type="date" id="invoiceDate"></label><br><br>
-  <label>Time: <input type="time" id="invoiceTime"></label><br><br>
-  <label>Customer Name: <input type="text" id="customerName"></label><br><br>
-
-  <h3>Items</h3>
-  <table id="itemsTable">
-    <thead>
-      <tr>
-        <th>Item Code</th>
-        <th>Description</th>
-        <th>Qty</th>
-        <th>Price</th>
-        <th>Amount</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody id="itemsBody">
-      <!-- Rows will be added dynamically -->
-    </tbody>
-  </table>
+  <input type="text" id="itemDesc" placeholder="Item description">
+  <input type="number" id="itemAmount" placeholder="Amount (e.g. 49.99)" step="0.01">
 
   <button onclick="addItem()">Add Item</button>
-<script>
+
+  <div class="item-list" id="itemList"></div>
+  <div class="total" id="totalAmount">Total: $0.00</div>
+
+  <script>
+    let items = [];
+    let total = 0;
+
     function addItem() {
-      const tbody = document.getElementById("itemsBody");
-      const row = document.createElement("tr");
+      const desc = document.getElementById("itemDesc").value.trim();
+      const amount = parseFloat(document.getElementById("itemAmount").value);
 
-      row.innerHTML = `
-        <td><input type="text" class="item-code" placeholder="Item Code"></td>
-        <td><input type="text" class="item-desc" placeholder="Description"></td>
-        <td><input type="number" class="item-qty" value="1" min="1" onchange="updateAmount(this)"></td>
-        <td><input type="number" class="item-price" value="0" min="0" onchange="updateAmount(this)"></td>
-        <td class="item-amount">R0.00</td>
-        <td><button onclick="removeItem(this)">Remove</button></td>
-      `;
+      if (!desc || isNaN(amount) || amount < 0) {
+        alert("Please enter a valid description and a positive amount.");
+        return;
+      }
 
-      tbody.appendChild(row);
+      items.push({ desc, amount });
+      total += amount;
+
+      // Clear inputs
+      document.getElementById("itemDesc").value = "";
+      document.getElementById("itemAmount").value = "";
+
+      renderItems();
+      updateTotal();
     }
 
-    function updateAmount(el) {
-      const row = el.closest("tr");
-      const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
-      const price = parseFloat(row.querySelector(".item-price").value) || 0;
-      const amount = qty * price;
-      row.querySelector(".item-amount").innerText = `R{amount.toFixed(1000)}`;
+    function renderItems() {
+      const list = document.getElementById("itemList");
+      list.innerHTML = "";
+      items.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.textContent = `#${index + 1} - ${item.desc}: $${item.amount.toFixed(2)}`;
+        list.appendChild(div);
+      });
     }
 
-    function removeItem(button) {
-      const row = button.closest("tr");
-      row.remove();
+    function updateTotal() {
+      document.getElementById("totalAmount").textContent = `Total: $${total.toFixed(2)}`;
     }
   </script>
 
-
-  <div class="total" id="totalAmount">Total: R0.00</div>
 </body>
 </html>
