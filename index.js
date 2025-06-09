@@ -14,6 +14,12 @@ function addRow() {
   updateTotals();
 }
 
+function showDateTime() {
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      document.getElementById('output').innerText = `Selected: ${date} ${time}`;
+    }
+
 function deleteRow(btn) {
   const row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
