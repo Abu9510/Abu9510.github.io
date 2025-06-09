@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ABSTECH Invoicing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>ABSTECH Invoicing</h1>
+
+    <div class="form-section">
+      <label>Client Name: <input type="text" id="clientName" /></label>
+      <label>Client Email: <input type="text" id="clientEmail" /></label>
+    </div>
+
+    <table id="invoiceTable">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="invoiceBody">
+        <!-- Rows inserted dynamically -->
+      </tbody>
+    </table>
+
+    <button onclick="addRow()">Add Item</button>
+
+    <div class="totals">
+      <p>Subtotal: R<span id="subtotal">0.00</span></p>
+      <p><strong>Total: R<span id="total">0.00</span></strong></p>
+    </div>
+
+    <button onclick="window.print()">Print Invoice</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
