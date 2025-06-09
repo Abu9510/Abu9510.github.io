@@ -136,16 +136,22 @@
       <table class="items-table">
         <thead>
           <tr>
-            <th>Qty</th>
-            <th>Item</th>
             <th>Description</th>
-            <th>Unit Price</th>
+            <th>QTY</th>
+            <th>Unit price</th>
             <th>Line Total</th>
           </tr>
         </thead>
-        <tbody id="invoiceBody">
-        <!-- Rows inserted dynamically -->
-      </tbody>
+        <tbody>
+      <!-- Initial row -->
+      <tr>
+        <td><input type="text" name="description[]"></td>
+        <td><input type="number" name="quantity[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="unit-price[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="amount[]" readonly></td>
+        <td><button onclick="removeRow(this)">Remove</button></td>
+      </tr>
+    </tbody>
     </table>
 
     <button onclick="addRow()">Add Item</button>
@@ -155,18 +161,6 @@
       <p><strong>Total: R<span id="total">0.00</span></strong></p>
     </div>
       </table>
-
-      <table class="info-table">
-        <tr>
-          <td class="right bold" colspan="4">Subtotal:</td>
-          <td class="right">R1,433.43</td>
-        </tr>
-        <tr>
-          <td class="right bold" colspan="4">Total:</td>
-          <td class="right">R1,433.43</td>
-        </tr>
-      </table>
-    </div>
 
     <div class="note">
       80% payment is required to secure installation spot. <br />
@@ -181,17 +175,31 @@
   <script>
   // Set today's date in the quote
   document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
+    function addItem() {
+      const table = document.getElementById('quotationTable').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
 
-     document.querySelector('.print-button').addEventListener('click', function () {
-    const name = document.getElementById('customer-name').value;
-    const address = document.getElementById('customer-address').value;
+      newRow.innerHTML = `
+        <td><input type="text" name="description[]"></td>
+        <td><input type="number" name="quantity[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="unit-price[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="amount[]" readonly></td>
+        <td><button onclick="removeRow(this)">Remove</button></td>
+      `;
+    }
 
-    // Replace input fields with plain text before printing
-    document.getElementById('customer-name').outerHTML = name;
-    document.getElementById('customer-address').outerHTML = address;
+    function removeRow(button) {
+      const row = button.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
 
-    window.print();
-  });
+    function updateAmount(input) {
+      const row = input.parentElement.parentElement;
+      const quantity = row.querySelector('input[name="quantity[]"]').value || 0;
+      const price = row.querySelector('input[name="unit-price[]"]').value || 0;
+      const amountField = row.querySelector('input[name="amount[]"]');
+      amountField.value = (parseFloat(quantity) * parseFloat(price)).toFixed(2);
+    }
 </script>
 </body>
 </html>
