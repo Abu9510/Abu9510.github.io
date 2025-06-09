@@ -135,26 +135,28 @@
     <div class="section">
       <table class="items-table">
         <thead>
-          <tr>
-            <th>Description</th>
-            <th>QTY</th>
-            <th>Unit price</th>
-            <th>Line Total</th>
-          </tr>
-        </thead>
-        <tbody>
+      <tr>
+        <th>Item Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
       <!-- Initial row -->
       <tr>
         <td><input type="text" name="description[]"></td>
         <td><input type="number" name="quantity[]" oninput="updateAmount(this)"></td>
-        <td><input type="number" name="unit-price[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="price[]" oninput="updateAmount(this)"></td>
         <td><input type="number" name="amount[]" readonly></td>
         <td><button onclick="removeRow(this)">Remove</button></td>
       </tr>
     </tbody>
-    </table>
+  </table>
 
-    <button onclick="addRow()">Add Item</button>
+  <button onclick="addItem()">Add Item</button>
+
 
     <div class="totals">
       <p>Subtotal: R<span id="subtotal">0.00</span></p>
@@ -175,6 +177,7 @@
   <script>
   // Set today's date in the quote
   document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
+
     function addItem() {
       const table = document.getElementById('quotationTable').getElementsByTagName('tbody')[0];
       const newRow = table.insertRow();
@@ -182,7 +185,7 @@
       newRow.innerHTML = `
         <td><input type="text" name="description[]"></td>
         <td><input type="number" name="quantity[]" oninput="updateAmount(this)"></td>
-        <td><input type="number" name="unit-price[]" oninput="updateAmount(this)"></td>
+        <td><input type="number" name="price[]" oninput="updateAmount(this)"></td>
         <td><input type="number" name="amount[]" readonly></td>
         <td><button onclick="removeRow(this)">Remove</button></td>
       `;
@@ -196,7 +199,7 @@
     function updateAmount(input) {
       const row = input.parentElement.parentElement;
       const quantity = row.querySelector('input[name="quantity[]"]').value || 0;
-      const price = row.querySelector('input[name="unit-price[]"]').value || 0;
+      const price = row.querySelector('input[name="price[]"]').value || 0;
       const amountField = row.querySelector('input[name="amount[]"]');
       amountField.value = (parseFloat(quantity) * parseFloat(price)).toFixed(2);
     }
