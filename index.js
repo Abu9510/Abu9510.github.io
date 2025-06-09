@@ -14,6 +14,44 @@ function addRow() {
   updateTotals();
 }
 
+function addItem() {
+      const tbody = document.getElementById('itemsBody');
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td><input type="text" class="item-code"></td>
+        <td><input type="text" class="item-desc"></td>
+        <td><input type="number" class="item-qty" min="1" value="1" onchange="updateTotals()"></td>
+        <td><input type="number" class="item-price" min="0" value="0" onchange="updateTotals()"></td>
+        <td class="item-amount">$0.00</td>
+        <td><button onclick="removeItem(this)">Remove</button></td>
+      `;
+
+      tbody.appendChild(row);
+      updateTotals();
+    }
+
+    function removeItem(button) {
+      const row = button.closest('tr');
+      row.remove();
+      updateTotals();
+    }
+
+    function updateTotals() {
+      const rows = document.querySelectorAll('#itemsBody tr');
+      let total = 0;
+
+      rows.forEach(row => {
+        const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+        const price = parseFloat(row.querySelector('.item-price').value) || 0;
+        const amount = qty * price;
+        row.querySelector('.item-amount').innerText = `$${amount.toFixed(2)}`;
+        total += amount;
+      });
+
+      document.getElementById('totalAmount').innerText = `Total: $${total.toFixed(2)}`;
+    }
+
 function showDateTime() {
       const date = document.getElementById('date').value;
       const time = document.getElementById('time').value;
