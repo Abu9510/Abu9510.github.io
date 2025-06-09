@@ -156,7 +156,7 @@
     </tbody>
   </table>
 
-  <button onclick="addItem()">Add Item</button>
+<button onclick="addItem()">Add Item</button>
 
 
     <div class="note">
@@ -174,7 +174,7 @@
   document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
 
      function addItem() {
-      const table = document.getElementById("quotationTable").getElementsByTagName("tbody")[0];
+      const table = document.getElementByclass("itemsTable").getElementsByTagName("tbody")[0];
       const newRow = table.insertRow();
 
       newRow.innerHTML = `
