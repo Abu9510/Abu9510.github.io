@@ -2,25 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ABSTECH Invoicing</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Invoice Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    input[type="text"], input[type="number"], input[type="date"], input[type="time"] {
+      padding: 5px;
+      width: 100%;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 12px;
+    }
+    .total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>ABSTECH Invoicing</h1>
+  <h2>Invoice Form</h2>
 
-    <div class="date-and-time">
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date"><br><br>
-    </div>
+  <label>Date: <input type="date" id="invoiceDate"></label><br><br>
+  <label>Time: <input type="time" id="invoiceTime"></label><br><br>
+  <label>Customer Name: <input type="text" id="customerName"></label><br><br>
 
-    <div class="form-section">
-      <label>Client Name: <input type="text" id="clientName" /></label>
-      <label>Client Email: <input type="text" id="clientEmail" /></label>
-    </div>
-
-    <h3>Items</h3>
+  <h3>Items</h3>
   <table id="itemsTable">
     <thead>
       <tr>
@@ -37,10 +60,8 @@
     </tbody>
   </table>
 
-
-    <button onclick="addRow()">Add Item</button>
-
-    <script>
+  <button onclick="addItem()">Add Item</button>
+<script>
     function addItem() {
       const tbody = document.getElementById("itemsBody");
       const row = document.createElement("tr");
@@ -70,15 +91,8 @@
       row.remove();
     }
   </script>
-     
-  
-    <div class="totals">
-      <p>Subtotal: R<span id="subtotal">0.00</span></p>
-      <p><strong>Total: R<span id="total">0.00</span></strong></p>
-    </div>
 
-    <button onclick="window.print()">Print Invoice</button>
-  </div>
 
+  <div class="total" id="totalAmount">Total: $0.00</div>
 </body>
 </html>
