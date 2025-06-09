@@ -85,7 +85,7 @@
       const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
       const price = parseFloat(row.querySelector(".item-price").value) || 0;
       const amount = qty * price;
-      row.querySelector(".item-amount").innerText = `R{amount.toFixed(2)}`;
+      row.querySelector(".item-amount").innerText = `R{amount.toFixed(1000)}`;
     }
 
     function removeItem(button) {
