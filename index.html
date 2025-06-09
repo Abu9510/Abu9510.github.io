@@ -136,20 +136,21 @@
       <table class="items-table">
         <thead>
       <tr>
-        <th>Item Description</th>
+        <th>Item</th>
+        <th>Description</th>
         <th>Qty</th>
-        <th>Price</th>
-        <th>Amount</th>
+        <th>Unit Price</th>
+        <th>Total Line Price</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Initial row -->
       <tr>
+        <td><input type="text" name="item[]"></td>
         <td><input type="text" name="description[]"></td>
-        <td><input type="number" name="qty[]" oninput="updateAmount(this)"></td>
-        <td><input type="number" name="price[]"></td>
-        <td><input type="number" name="amount[]"></td>
+        <td><input type="number" name="qty[]" oninput="calculateLineTotal(this)"></td>
+        <td><input type="number" name="unitPrice[]" oninput="calculateLineTotal(this)"></td>
+        <td><input type="number" name="lineTotal[]" readonly></td>
         <td><button onclick="removeRow(this)">Remove</button></td>
       </tr>
     </tbody>
@@ -157,12 +158,6 @@
 
   <button onclick="addItem()">Add Item</button>
 
-
-    <div class="totals">
-      <p>Subtotal: R<span id="subtotal">0.00</span></p>
-      <p><strong>Total: R<span id="total">0.00</span></strong></p>
-    </div>
-      </table>
 
     <div class="note">
       80% payment is required to secure installation spot. <br />
@@ -178,31 +173,33 @@
   // Set today's date in the quote
   document.getElementById("quote-date").textContent = new Date().toLocaleDateString('en-ZA');
 
-    function addItem() {
-      const table = document.getElementById('quotationTable').getElementsByTagName('tbody')[0];
+     function addItem() {
+      const table = document.getElementById("quotationTable").getElementsByTagName("tbody")[0];
       const newRow = table.insertRow();
 
       newRow.innerHTML = `
+        <td><input type="text" name="item[]"></td>
         <td><input type="text" name="description[]"></td>
-        <td><input type="number" name="qty[]" oninput="updateAmount(this)"></td>
-        <td><input type="number" name="price[]"></td>
-        <td><input type="number" name="amount[]"></td>
+        <td><input type="number" name="qty[]" oninput="calculateLineTotal(this)"></td>
+        <td><input type="number" name="unitPrice[]" oninput="calculateLineTotal(this)"></td>
+        <td><input type="number" name="lineTotal[]" readonly></td>
         <td><button onclick="removeRow(this)">Remove</button></td>
       `;
     }
 
     function removeRow(button) {
-      const row = button.parentNode.parentNode;
-      row.parentNode.removeChild(row);
+      const row = button.closest("tr");
+      row.remove();
     }
 
-    function updateAmount(input) {
-      const row = input.parentElement.parentElement;
-      const quantity = row.querySelector('input[name="quantity[]"]').value || 0;
-      const price = row.querySelector('input[name="price[]"]').value || 0;
-      const amountField = row.querySelector('input[name="amount[]"]');
-      amountField.value = (parseFloat(quantity) * parseFloat(price)).toFixed(2);
+    function calculateLineTotal(input) {
+      const row = input.closest("tr");
+      const qty = parseFloat(row.querySelector('input[name="qty[]"]').value) || 0;
+      const unitPrice = parseFloat(row.querySelector('input[name="unitPrice[]"]').value) || 0;
+      const total = qty * unitPrice;
+      row.querySelector('input[name="lineTotal[]"]').value = total.toFixed(2);
     }
+    
 </script>
 </body>
 </html>
